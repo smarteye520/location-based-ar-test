@@ -22,21 +22,21 @@ function staticLoadPlaces() {
 var models = [
     {
         url: './assets/magnemite/scene.gltf',
-        scale: '0.5 0.5 0.5',
-        info: 'Magnemite, Lv. 5, HP 10/10',
+        scale: '0.3 0.3 0.3',
+        info: 'Magnemite',
         rotation: '0 180 0',
     },
     {
         url: './assets/articuno/scene.gltf',
         scale: '0.15 0.15 0.15',
         rotation: '0 180 0',
-        info: 'Articuno, Lv. 80, HP 100/100',
+        info: 'Articuno',
     },
     {
         url: './assets/dragonite/scene.gltf',
-        scale: '0.08 0.08 0.08',
+        scale: '0.06 0.06 0.06',
         rotation: '0 180 0',
-        info: 'Dragonite, Lv. 99, HP 150/150',
+        info: 'Dragonite',
     },
 ];
 
@@ -57,7 +57,7 @@ var setModel = function (model, entity) {
     entity.setAttribute('gltf-model', model.url);
 
     const div = document.querySelector('.instructions');
-    div.innerText = model.info;
+    // div.innerText = model.info;
 };
 
 function renderPlaces(places) {
