@@ -84,7 +84,7 @@ function renderPlaces(places) {
         let object = document.createElement('a-entity');
         object.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
         setModel(models[0], object);
-        object.setAttribute('name', places.name)      
+        object.setAttribute('name', place.name)      
 
         // model.setAttribute('animation-mixer', '');
 
