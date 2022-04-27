@@ -135,7 +135,7 @@ function renderPlaces(places) {
         icon.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
 
         const div = document.querySelector('.instructions');
-        div.innerText = 'Debug 1';
+        div.innerText =  'Debug 2';
 
         const clickListener = function (ev) {
             ev.stopPropagation();
@@ -147,18 +147,18 @@ function renderPlaces(places) {
 
             if (el && el === ev.target) {
                 const div = document.querySelector('.instructions');
-                div.innerText = 'Debug 2';
+                div.innerText = name;
 
-                const label = document.createElement('span');
-                const container = document.createElement('div');
-                container.setAttribute('id', 'place-label');
-                label.innerText = name;
-                container.appendChild(label);
-                document.body.appendChild(container);
+                // const label = document.createElement('span');
+                // const container = document.createElement('div');
+                // container.setAttribute('id', 'place-label');
+                // label.innerText = name;
+                // container.appendChild(label);
+                // document.body.appendChild(container);
 
-                setTimeout(() => {
-                    container.parentElement.removeChild(container);
-                }, 5500);
+                // setTimeout(() => {
+                //     container.parentElement.removeChild(container);
+                // }, 5500);
             }
         };
 
