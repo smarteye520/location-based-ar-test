@@ -123,7 +123,7 @@ function renderPlaces(places) {
             }
         };
 
-        icon.addEventListener('click', clickListener);
+        object.addEventListener('click', clickListener);
 
         scene.appendChild(object);
     });
