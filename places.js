@@ -1,8 +1,8 @@
 window.onload = () => {
-    let method = 'dynamic';
+    // let method = 'dynamic';
 
     // if you want to statically add places, de-comment following line
-    method = 'static';
+    let method = 'static';
 
     if (method === 'static') {
         let places = staticLoadPlaces();
@@ -33,26 +33,19 @@ window.onload = () => {
 function staticLoadPlaces() {
     return [
         {
-            name: "Your place name",
+            name: "AR Object",
             location: {
                 lat: 41.682350,
-                lng: 123.387483,
+                lng: 123.387492,
             }
         },
-        {
-            name: 'Another place name',
-            location: {
-                lat: 41.682354,
-                lng: 123.387483,
-            }
-        }
     ];
 }
 
 // getting places from REST APIs // fsq3WhJBYV0mI4RJe/tXs3u4JOgPdMrRFCzE3nUhfteEGYI=
 function dynamicLoadPlaces(position) {
     let params = {
-        radius: 300,    // search places not farther than this value (in meters)
+        radius: 500,    // search places not farther than this value (in meters)
         clientId: 'EJX0XFUTFFXGV0CTXTC2UVVU412KMMPWFOS4DWWGMS3L4FXQ',   // add your credentials here
         clientSecret: 'WCJY1LIWNYFKXGNPZ21CRLCRYCFPOOV1V5DCOOZZJA2A2CLC',   // add your credentials here
         version: '20300101',    // foursquare versioning, required but unuseful for this demo
