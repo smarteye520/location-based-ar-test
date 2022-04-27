@@ -10,10 +10,25 @@ window.onload = () => {
 function staticLoadPlaces() {
     return [
         {
-            name: 'AR Object',
+            name: 'First Place Object',
             location: {
-                lat: 41.682350,
-                lng: 123.387492,
+                lat: 41.682354,
+                lng: 123.387496,
+            },
+        },
+
+        {
+            name: 'Second Place Object',
+            location: {
+                lat: 41.682346,
+                lng: 123.387483,
+            },
+        },
+        {
+            name: 'Third Place Object',
+            location: {
+                lat: 41.682332,
+                lng: 123.387480,
             },
         },
     ];
@@ -22,7 +37,7 @@ function staticLoadPlaces() {
 var models = [
     {
         url: './assets/magnemite/scene.gltf',
-        scale: '0.3 0.3 0.3',
+        scale: '0.1 0.1 0.1',
         info: 'Magnemite',
         rotation: '0 180 0',
     },
