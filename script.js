@@ -135,34 +135,34 @@ function renderPlaces(places) {
         icon.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
 
         const div = document.querySelector('.instructions');
-        div.innerText = place.name;
+        div.innerText = 'Debug 1';
 
-        // const clickListener = function (ev) {
-        //     ev.stopPropagation();
-        //     ev.preventDefault();
+        const clickListener = function (ev) {
+            ev.stopPropagation();
+            ev.preventDefault();
 
-        //     const name = ev.target.getAttribute('name');
+            const name = ev.target.getAttribute('name');
 
-        //     const el = ev.detail.intersection && ev.detail.intersection.object.el;
+            const el = ev.detail.intersection && ev.detail.intersection.object.el;
 
-        //     if (el && el === ev.target) {
-        //         const div = document.querySelector('.instructions');
-        //         div.innerText = name;
+            if (el && el === ev.target) {
+                const div = document.querySelector('.instructions');
+                div.innerText = name;
 
-        //         const label = document.createElement('span');
-        //         const container = document.createElement('div');
-        //         container.setAttribute('id', 'place-label');
-        //         label.innerText = name;
-        //         container.appendChild(label);
-        //         document.body.appendChild(container);
+                const label = document.createElement('span');
+                const container = document.createElement('div');
+                container.setAttribute('id', 'place-label');
+                label.innerText = name;
+                container.appendChild(label);
+                document.body.appendChild(container);
 
-        //         setTimeout(() => {
-        //             container.parentElement.removeChild(container);
-        //         }, 5500);
-        //     }
-        // };
+                setTimeout(() => {
+                    container.parentElement.removeChild(container);
+                }, 5500);
+            }
+        };
 
-        // icon.addEventListener('click', clickListener);
+        icon.addEventListener('click', clickListener);
 
         scene.appendChild(icon);
     });
