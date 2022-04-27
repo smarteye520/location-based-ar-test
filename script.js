@@ -16,7 +16,6 @@ function staticLoadPlaces() {
                 lng: 123.387496,
             },
         },
-
         {
             name: 'Second Place Object',
             location: {
