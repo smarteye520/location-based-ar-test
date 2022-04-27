@@ -81,21 +81,58 @@ function renderPlaces(places) {
         let latitude = place.location.lat;
         let longitude = place.location.lng;
 
-        let object = document.createElement('a-entity');
-        object.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
-        setModel(models[0], object);
-        object.setAttribute('name', place.name)      
+        // let object = document.createElement('a-entity');
+        // object.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
+        // setModel(models[0], object);
+        // object.setAttribute('name', place.name)      
 
-        // model.setAttribute('animation-mixer', '');
+        // // object.setAttribute('animation-mixer', '');
 
-        // document.querySelector('button[data-action="change"]').addEventListener('click', function () {
-        //     var entity = document.querySelector('[gps-entity-place]');
-        //     modelIndex++;
-        //     var newIndex = modelIndex % models.length;
-        //     setModel(models[newIndex], entity);
-        // });
+        // // document.querySelector('button[data-action="change"]').addEventListener('click', function () {
+        // //     var entity = document.querySelector('[gps-entity-place]');
+        // //     modelIndex++;
+        // //     var newIndex = modelIndex % models.length;
+        // //     setModel(models[newIndex], entity);
+        // // });
 
-        object.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
+        // object.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
+
+        // const clickListener = function (ev) {
+        //     ev.stopPropagation();
+        //     ev.preventDefault();
+
+        //     const name = ev.target.getAttribute('name');
+
+        //     const el = ev.detail.intersection && ev.detail.intersection.object.el;
+
+        //     if (el && el === ev.target) {
+        //         const div = document.querySelector('.instructions');
+        //         div.innerText = name;
+
+        //         const label = document.createElement('span');
+        //         const container = document.createElement('div');
+        //         container.setAttribute('id', 'place-label');
+        //         label.innerText = name;
+        //         container.appendChild(label);
+        //         document.body.appendChild(container);
+
+        //         setTimeout(() => {
+        //             container.parentElement.removeChild(container);
+        //         }, 6000);
+        //     }
+        // };
+
+        // object.addEventListener('click', clickListener);
+
+        // scene.appendChild(object);
+
+        const icon = document.createElement('a-image');
+        icon.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude}`);
+        icon.setAttribute('name', place.name);
+        icon.setAttribute('src', './assets/map-marker.png');
+        // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
+        icon.setAttribute('scale', '1 1 1');
+        icon.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
 
         const clickListener = function (ev) {
             ev.stopPropagation();
@@ -109,21 +146,21 @@ function renderPlaces(places) {
                 const div = document.querySelector('.instructions');
                 div.innerText = name;
 
-                // const label = document.createElement('span');
-                // const container = document.createElement('div');
-                // container.setAttribute('id', 'place-label');
-                // label.innerText = name;
-                // container.appendChild(label);
-                // document.body.appendChild(container);
+                const label = document.createElement('span');
+                const container = document.createElement('div');
+                container.setAttribute('id', 'place-label');
+                label.innerText = name;
+                container.appendChild(label);
+                document.body.appendChild(container);
 
-                // setTimeout(() => {
-                //     container.parentElement.removeChild(container);
-                // }, 6000);
+                setTimeout(() => {
+                    container.parentElement.removeChild(container);
+                }, 5500);
             }
         };
 
-        object.addEventListener('click', clickListener);
+        icon.addEventListener('click', clickListener);
 
-        scene.appendChild(object);
+        scene.appendChild(icon);
     });
 }
