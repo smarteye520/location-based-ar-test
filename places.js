@@ -119,39 +119,39 @@ function renderPlaces(places) {
         const longitude = place.location.lng;
 
         // Render place icon
-        // const icon = document.createElement('a-image');
-        // icon.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude}`);
-        // icon.setAttribute('name', place.name);
-        // icon.setAttribute('src', './assets/map-marker.png');
-        // // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
-        // icon.setAttribute('scale', '1 1 1');
-        // icon.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
+        const icon = document.createElement('a-image');
+        icon.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude}`);
+        icon.setAttribute('name', place.name);
+        icon.setAttribute('src', './assets/map-marker.png');
+        // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
+        icon.setAttribute('scale', '1 1 1');
+        icon.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
 
-        // const clickListener = function (ev) {
-        //     ev.stopPropagation();
-        //     ev.preventDefault();
+        const clickListener = function (ev) {
+            ev.stopPropagation();
+            ev.preventDefault();
 
-        //     const name = ev.target.getAttribute('name');
+            const name = ev.target.getAttribute('name');
 
-        //     const el = ev.detail.intersection && ev.detail.intersection.object.el;
+            const el = ev.detail.intersection && ev.detail.intersection.object.el;
 
-        //     if (el && el === ev.target) {
-        //         const label = document.createElement('span');
-        //         const container = document.createElement('div');
-        //         container.setAttribute('id', 'place-label');
-        //         label.innerText = name;
-        //         container.appendChild(label);
-        //         document.body.appendChild(container);
+            if (el && el === ev.target) {
+                const label = document.createElement('span');
+                const container = document.createElement('div');
+                container.setAttribute('id', 'place-label');
+                label.innerText = name;
+                container.appendChild(label);
+                document.body.appendChild(container);
 
-        //         setTimeout(() => {
-        //             container.parentElement.removeChild(container);
-        //         }, 5500);
-        //     }
-        // };
+                setTimeout(() => {
+                    container.parentElement.removeChild(container);
+                }, 5500);
+            }
+        };
 
-        // icon.addEventListener('click', clickListener);
+        icon.addEventListener('click', clickListener);
 
-        // scene.appendChild(icon);
+        scene.appendChild(icon);
 
         // Render a-link object
         // const placeText = document.createElement('a-link');
@@ -164,15 +164,6 @@ function renderPlaces(places) {
         // });
 
         // scene.appendChild(placeText);     
-        
-        let model = document.createElement('a-entity');
-        model.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
-        model.setAttribute('title', place.name);
-        setModel(models[0], model);
-
-        model.setAttribute('animation-mixer', '');
-
-        scene.appendChild(model);
 
     });
 }
