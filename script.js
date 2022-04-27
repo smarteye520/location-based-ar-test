@@ -10,10 +10,10 @@ window.onload = () => {
 function staticLoadPlaces() {
     return [
         {
-            name: 'Pokèmon',
+            name: 'AR Object',
             location: {
                 lat: 41.682350,
-                lng: 123.387483,
+                lng: 123.387492,
             },
         },
     ];
