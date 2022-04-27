@@ -12,8 +12,8 @@ function staticLoadPlaces() {
         {
             name: 'First Place Object',
             location: {
-                lat: 41.682354,
-                lng: 123.387496,
+                lat: 41.682387,
+                lng: 123.387509,
             },
         },
         {
