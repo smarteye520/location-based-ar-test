@@ -10,7 +10,6 @@ window.onload = () => {
     }
 
     if (method !== 'static') {
-
         // first get current user location
         return navigator.geolocation.getCurrentPosition(function (position) {
 
@@ -41,6 +40,44 @@ function staticLoadPlaces() {
         },
     ];
 }
+
+var models = [
+    {
+        url: './assets/magnemite/scene.gltf',
+        scale: '0.1 0.1 0.1',
+        info: 'Magnemite',
+        rotation: '0 180 0',
+    },
+    {
+        url: './assets/articuno/scene.gltf',
+        scale: '0.15 0.15 0.15',
+        rotation: '0 180 0',
+        info: 'Articuno',
+    },
+    {
+        url: './assets/dragonite/scene.gltf',
+        scale: '0.06 0.06 0.06',
+        rotation: '0 180 0',
+        info: 'Dragonite',
+    },
+];
+
+var setModel = function (model, entity) {
+    if (model.scale) {
+        entity.setAttribute('scale', model.scale);
+    }
+
+    if (model.rotation) {
+        entity.setAttribute('rotation', model.rotation);
+    }
+
+    if (model.position) {
+        entity.setAttribute('position', model.position);
+    }
+
+    entity.setAttribute('gltf-model', model.url);
+};
+
 
 // getting places from REST APIs // fsq3WhJBYV0mI4RJe/tXs3u4JOgPdMrRFCzE3nUhfteEGYI=
 function dynamicLoadPlaces(position) {
@@ -81,51 +118,61 @@ function renderPlaces(places) {
         const latitude = place.location.lat;
         const longitude = place.location.lng;
 
-        // add place icon
-        const icon = document.createElement('a-image');
-        icon.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude}`);
-        icon.setAttribute('name', place.name);
-        icon.setAttribute('src', './assets/map-marker.png');
-        // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
-        icon.setAttribute('scale', '1 1 1');
-        icon.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
+        // Render place icon
+        // const icon = document.createElement('a-image');
+        // icon.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude}`);
+        // icon.setAttribute('name', place.name);
+        // icon.setAttribute('src', './assets/map-marker.png');
+        // // for debug purposes, just show in a bigger scale, otherwise I have to personally go on places...
+        // icon.setAttribute('scale', '1 1 1');
+        // icon.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
 
-        const clickListener = function (ev) {
-            ev.stopPropagation();
-            ev.preventDefault();
+        // const clickListener = function (ev) {
+        //     ev.stopPropagation();
+        //     ev.preventDefault();
 
-            const name = ev.target.getAttribute('name');
+        //     const name = ev.target.getAttribute('name');
 
-            const el = ev.detail.intersection && ev.detail.intersection.object.el;
+        //     const el = ev.detail.intersection && ev.detail.intersection.object.el;
 
-            if (el && el === ev.target) {
-                const label = document.createElement('span');
-                const container = document.createElement('div');
-                container.setAttribute('id', 'place-label');
-                label.innerText = name;
-                container.appendChild(label);
-                document.body.appendChild(container);
+        //     if (el && el === ev.target) {
+        //         const label = document.createElement('span');
+        //         const container = document.createElement('div');
+        //         container.setAttribute('id', 'place-label');
+        //         label.innerText = name;
+        //         container.appendChild(label);
+        //         document.body.appendChild(container);
 
-                setTimeout(() => {
-                    container.parentElement.removeChild(container);
-                }, 5500);
-            }
-        };
+        //         setTimeout(() => {
+        //             container.parentElement.removeChild(container);
+        //         }, 5500);
+        //     }
+        // };
 
-        icon.addEventListener('click', clickListener);
+        // icon.addEventListener('click', clickListener);
 
-        scene.appendChild(icon);
+        // scene.appendChild(icon);
 
+        // Render a-link object
         // const placeText = document.createElement('a-link');
         // placeText.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
         // placeText.setAttribute('title', place.name);
-        // placeText.setAttribute('scale', '15 15 15');
+        // placeText.setAttribute('scale', '3 3 3');
         
         // placeText.addEventListener('loaded', () => {
         //     window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
         // });
 
-        // scene.appendChild(placeText);      
+        // scene.appendChild(placeText);     
+        
+        let model = document.createElement('a-entity');
+        model.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
+        model.setAttribute('title', place.name);
+        setModel(models[0], model);
+
+        model.setAttribute('animation-mixer', '');
+
+        scene.appendChild(model);
 
     });
 }
