@@ -71,8 +71,8 @@ var setModel = function (model, entity) {
 
     entity.setAttribute('gltf-model', model.url);
 
-    const div = document.querySelector('.instructions');
-    div.innerText = model.info;
+    // const div = document.querySelector('.instructions');
+    // div.innerText = model.info;
 };
 
 function renderPlaces(places) {
@@ -82,10 +82,10 @@ function renderPlaces(places) {
         let latitude = place.location.lat;
         let longitude = place.location.lng;
 
-        let model = document.createElement('a-entity');
-        model.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
-
-        setModel(models[0], model);
+        let object = document.createElement('a-entity');
+        object.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
+        setModel(models[0], object);
+        object.setAttribute('name', places.name)      
 
         // model.setAttribute('animation-mixer', '');
 
@@ -96,6 +96,35 @@ function renderPlaces(places) {
         //     setModel(models[newIndex], entity);
         // });
 
-        scene.appendChild(model);
+        object.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
+
+        const clickListener = function (ev) {
+            ev.stopPropagation();
+            ev.preventDefault();
+
+            const name = ev.target.getAttribute('name');
+
+            const el = ev.detail.intersection && ev.detail.intersection.object.el;
+
+            if (el && el === ev.target) {
+                const div = document.querySelector('.instructions');
+                div.innerText = `Clicked: ${name}.`
+
+                // const label = document.createElement('span');
+                // const container = document.createElement('div');
+                // container.setAttribute('id', 'place-label');
+                // label.innerText = name;
+                // container.appendChild(label);
+                // document.body.appendChild(container);
+
+                // setTimeout(() => {
+                //     container.parentElement.removeChild(container);
+                // }, 6000);
+            }
+        };
+
+        icon.addEventListener('click', clickListener);
+
+        scene.appendChild(object);
     });
 }
