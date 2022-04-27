@@ -107,7 +107,7 @@ function renderPlaces(places) {
 
             if (el && el === ev.target) {
                 const div = document.querySelector('.instructions');
-                div.innerText = `Clicked: ${name}.`
+                div.innerText = name;
 
                 // const label = document.createElement('span');
                 // const container = document.createElement('div');
