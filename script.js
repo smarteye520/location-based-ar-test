@@ -134,6 +134,9 @@ function renderPlaces(places) {
         icon.setAttribute('scale', '1 1 1');
         icon.addEventListener('loaded', () => window.dispatchEvent(new CustomEvent('gps-entity-place-loaded')));
 
+        const div = document.querySelector('.instructions');
+        div.innerText = place.name;
+
         // const clickListener = function (ev) {
         //     ev.stopPropagation();
         //     ev.preventDefault();
