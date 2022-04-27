@@ -35,8 +35,8 @@ function staticLoadPlaces() {
         {
             name: "AR Object",
             location: {
-                lat: 41.682250,
-                lng: 123.387392,
+                lat: 41.682150,
+                lng: 123.387292,
             }
         },
     ];
